@@ -1,6 +1,6 @@
 package com.akash.newzz_compose.data.repository
 
-import com.akash.newzz_compose.data.apiService.NewsApiService
+import com.akash.newzz_compose.data.apiservice.NewsApiService
 import com.akash.newzz_compose.data.response.NewsError
 import com.akash.newzz_compose.data.response.NewsResponse
 import com.akash.newzz_compose.utils.Result

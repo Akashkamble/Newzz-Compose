@@ -74,7 +74,12 @@ fun BottomBar(viewModel: NewzzViewModel) {
 }
 
 @Composable
-fun BottomNavItem(asset: Int, isDark: State<Boolean>, onClick: () -> Unit, isSelected: Boolean = false) {
+fun BottomNavItem(
+    asset: Int,
+    isDark: State<Boolean>,
+    onClick: () -> Unit,
+    isSelected: Boolean = false
+) {
     IconButton(onClick = onClick) {
         Icon(
             asset = vectorResource(id = asset),

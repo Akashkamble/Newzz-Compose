@@ -8,9 +8,9 @@ News App built with JetPack Compose
 - [Newzz] (https://github.com/Akashkamble/Newzz)
 - [Newzz-Flutter] (https://github.com/Akashkamble/Newzz-Flutter)
 
-## The app built using MVVM architecture and contains following libraries
+## The app contains following libraries
 
-- [Jetpack Compose(v0.1.0-dev12)] (https://developer.android.com/jetpack/compose) (UI)
+- [Jetpack Compose(v0.1.0-dev13)] (https://developer.android.com/jetpack/compose) (UI)
 
 - [Koin](https://insert-koin.io/) (Dependency Injection)
 
@@ -21,6 +21,8 @@ News App built with JetPack Compose
 - [Retrofit](https://square.github.io/retrofit/) (Networking)
 
 - [Moshi](https://github.com/square/moshi) (Kotlin JSON library for Android from Square)
+
+- [Accompanist](https://github.com/chrisbanes/accompanist/tree/master/coil) (Image Loading with coil)
 
 
 # Note

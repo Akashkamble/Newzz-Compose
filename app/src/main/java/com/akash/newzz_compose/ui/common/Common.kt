@@ -1,6 +1,7 @@
 package com.akash.newzz_compose.ui.common
 
 import androidx.compose.Composable
+import androidx.ui.core.Alignment
 import androidx.ui.core.ContentScale
 import androidx.ui.core.Modifier
 import androidx.ui.foundation.Box
@@ -9,10 +10,8 @@ import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.Shape
 import androidx.ui.graphics.vector.VectorAsset
-import androidx.ui.layout.Spacer
-import androidx.ui.layout.fillMaxSize
-import androidx.ui.layout.preferredHeight
-import androidx.ui.layout.preferredWidth
+import androidx.ui.layout.*
+import androidx.ui.material.CircularProgressIndicator
 import androidx.ui.material.Surface
 import androidx.ui.res.vectorResource
 import androidx.ui.unit.Dp
@@ -40,11 +39,11 @@ fun RemoteImage(
     modifier: Modifier,
     errorImage: VectorAsset = vectorResource(id = R.drawable.ic_newzz_error),
     contentScale: ContentScale = ContentScale.Crop,
-    shape : Shape = RoundedCornerShape(5.dp)
+    shape: Shape = RoundedCornerShape(5.dp)
 ) {
     Box(
         modifier = modifier
-    ){
+    ) {
         if (url.isNullOrEmpty()) {
             Image(
                 modifier = Modifier.fillMaxSize(),
@@ -57,7 +56,12 @@ fun RemoteImage(
             ) {
                 CoilImageWithCrossfade(
                     data = url,
-                    contentScale = contentScale
+                    contentScale = contentScale,
+                    loading = {
+                        Stack(Modifier.fillMaxSize()) {
+                            CircularProgressIndicator(Modifier.gravity(Alignment.Center))
+                        }
+                    }
                 )
             }
         }
