@@ -21,7 +21,7 @@ import androidx.ui.unit.dp
 import com.akash.newzz_compose.Category
 import com.akash.newzz_compose.R
 import com.akash.newzz_compose.style.*
-import com.akash.newzz_compose.ui.articleListPage.ArticleList
+import com.akash.newzz_compose.ui.articlelist.ArticleList
 import com.akash.newzz_compose.viewmodel.NewzzViewModel
 
 
@@ -96,7 +96,11 @@ fun TopAppBar(viewModel: NewzzViewModel) {
 }
 
 @Composable
-fun ArticleStateWidget(state: State<NewzzViewModel.ArticleState>, isDark: State<Boolean>, onClick: () -> Unit) {
+fun ArticleStateWidget(
+    state: State<NewzzViewModel.ArticleState>,
+    isDark: State<Boolean>,
+    onClick: () -> Unit
+) {
     when {
         state.value.isLoading -> {
             Loading(isDark)
@@ -145,21 +149,26 @@ fun Loading(isDark: State<Boolean>) {
 }
 
 @Composable
-fun ErrorView(errorMessage: String, showRetry: Boolean, isDark: State<Boolean>, onClick: () -> Unit) {
+fun ErrorView(
+    errorMessage: String,
+    showRetry: Boolean,
+    isDark: State<Boolean>,
+    onClick: () -> Unit
+) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalGravity = Alignment.CenterHorizontally
     ) {
         Text(
             text = errorMessage,
-            style = if(isDark.value) articleTitleStyle.copy(color = titleColorDark) else articleTitleStyle
+            style = if (isDark.value) articleTitleStyle.copy(color = titleColorDark) else articleTitleStyle
         )
         if (showRetry) {
             TextButton(onClick = onClick) {
                 Text(
                     text = "Retry",
                     style = TextStyle(
-                        color = if(isDark.value) sourceTextColorDark else deepPurple
+                        color = if (isDark.value) sourceTextColorDark else deepPurple
                     )
                 )
             }

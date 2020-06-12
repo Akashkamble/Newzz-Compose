@@ -1,4 +1,4 @@
-package com.akash.newzz_compose.data.apiService
+package com.akash.newzz_compose.data.apiservice
 
 /**
  * Created by Akash on 06/06/20

@@ -1,7 +1,7 @@
 package com.akash.newzz_compose.di
 
 import com.akash.newzz_compose.viewmodel.NewzzViewModel
-import com.akash.newzz_compose.data.apiService.NewsApiService
+import com.akash.newzz_compose.data.apiservice.NewsApiService
 import com.akash.newzz_compose.data.repository.NewsRepository
 import com.akash.newzz_compose.data.repository.NewsRepositoryImpl
 import com.squareup.moshi.Moshi

@@ -19,8 +19,7 @@ class NewzzViewModel(private val repo: NewsRepository) : ViewModel() {
     private val viewModelScope = CoroutineScope(Dispatchers.Main) + job
 
     private val _pageNumber = MutableLiveData<Int>().apply {
-        value =
-            General
+        value = General
     }
     val pageNumber: LiveData<Int> = _pageNumber
 
@@ -120,7 +119,7 @@ class NewzzViewModel(private val repo: NewsRepository) : ViewModel() {
     private suspend fun fetchBusinessArticles(category: String) {
         val state = businessState.value!!
         if (state.list == null || state.list.isEmpty()) {
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 val articleState = ArticleState()
                 _businessState.value = articleState
             }
@@ -152,7 +151,7 @@ class NewzzViewModel(private val repo: NewsRepository) : ViewModel() {
     private suspend fun fetchTechArticles(category: String) {
         val state = techState.value!!
         if (state.list == null || state.list.isEmpty()) {
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 val articleState = ArticleState()
                 _techState.value = articleState
             }
@@ -194,8 +193,8 @@ class NewzzViewModel(private val repo: NewsRepository) : ViewModel() {
     )
 
     data class Error(
-        val errorMessage : String,
-        val showRetry : Boolean = true
+        val errorMessage: String,
+        val showRetry: Boolean = true
     )
 
     companion object {

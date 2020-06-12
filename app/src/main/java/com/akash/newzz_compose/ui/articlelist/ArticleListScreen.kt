@@ -1,10 +1,11 @@
-package com.akash.newzz_compose.ui.articleListPage
+package com.akash.newzz_compose.ui.articlelist
 
 import androidx.compose.Composable
 import androidx.compose.State
 import androidx.ui.core.Alignment
 import androidx.ui.core.ContextAmbient
 import androidx.ui.core.Modifier
+import androidx.ui.foundation.Box
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.clickable
@@ -25,20 +26,9 @@ import com.akash.newzz_compose.utils.CustomTabUtil
 
 @Composable
 fun ArticleRow(article: NewsArticle, isDark: State<Boolean>, onClick: () -> Unit) {
-    Column(modifier = Modifier.padding(start = 10.dp, end = 10.dp, top = 10.dp)) {
+    Box(modifier = Modifier.clickable(onClick = { onClick() })) {
         Row(
-            /* onClick with more than one modifier was not working hence wrapping it with Column
-            * Tried modifier = Modifier.clickable(
-                onClick = {
-                    onClick()
-                }
-            ).plus(Modifier.padding(start = 10.dp, end = 10.dp, top = 10.dp))
-            */
-            modifier = Modifier.clickable(
-                onClick = {
-                    onClick()
-                }
-            ),
+            modifier = Modifier.padding(all = 10.dp),
             verticalGravity = Alignment.CenterVertically
         ) {
             RemoteImage(
@@ -76,14 +66,24 @@ fun ArticleList(articles: List<NewsArticle>, isDark: State<Boolean>) {
     /**
      * App crashing while scrolling the AdapterList hence verticalScroller with Columns used.
      * @see <a href="https://issuetracker.google.com/issues/154653504">Issue tracker</a>
+     * Not fixed in version 0.1.0-dev13
      */
+
+    val context = ContextAmbient.current
     /*AdapterList(data = articles) { article ->
-        ArticleRow(article = article)
+        ArticleRow(
+            article = article,
+            isDark = isDark,
+            onClick = {
+                CustomTabUtil.launch(context, article.url.toString(), isDark.value)
+            }
+        )
+        HeightSpacer(value = 10.dp)
         Divider(
-            color = Color(0xFFDCDCDC)
+            color = if (isDark.value) dividerColorDark else dividerColor
         )
     }*/
-    val context = ContextAmbient.current
+
     VerticalScroller {
         Column(modifier = Modifier.fillMaxWidth()) {
             articles.forEach { article ->
@@ -94,7 +94,6 @@ fun ArticleList(articles: List<NewsArticle>, isDark: State<Boolean>) {
                         CustomTabUtil.launch(context, article.url.toString(), isDark.value)
                     }
                 )
-                HeightSpacer(value = 10.dp)
                 Divider(
                     color = if (isDark.value) dividerColorDark else dividerColor
                 )
