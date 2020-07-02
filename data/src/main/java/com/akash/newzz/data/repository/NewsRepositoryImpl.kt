@@ -1,9 +1,9 @@
-package com.akash.newzz_compose.data.repository
+package com.akash.newzz.data.repository
 
-import com.akash.newzz_compose.data.apiservice.NewsApiService
-import com.akash.newzz_compose.data.response.NewsError
-import com.akash.newzz_compose.data.response.NewsResponse
-import com.akash.newzz_compose.utils.Result
+import com.akash.newzz.data.Result
+import com.akash.newzz.data.apiservice.NewzzApiService
+import com.akash.newzz.data.response.NewsError
+import com.akash.newzz.data.response.NewsResponse
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.Dispatchers
@@ -14,10 +14,13 @@ import kotlinx.coroutines.withContext
  */
 
 class NewsRepositoryImpl constructor(
-    private val newsApiService: NewsApiService,
+    private val newsApiService: NewzzApiService,
     private val moshi: Moshi
 ) : NewsRepository {
-    override suspend fun getArticlesByCategoryAsync(category: String, page: Int): Result<NewsResponse> {
+    override suspend fun getArticlesByCategoryAsync(
+        category: String,
+        page: Int
+    ): Result<NewsResponse> {
         try {
             val response = newsApiService.getArticlesByCateGoryAsync(category)
             return if (response.isSuccessful) {

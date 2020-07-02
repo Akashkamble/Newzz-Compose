@@ -17,7 +17,7 @@ import androidx.ui.layout.preferredWidth
 import androidx.ui.material.Divider
 import androidx.ui.text.style.TextOverflow
 import androidx.ui.unit.dp
-import com.akash.newzz_compose.data.response.NewsArticle
+import com.akash.newzz.data.response.NewsArticle
 import com.akash.newzz_compose.style.articleTitleStyle
 import com.akash.newzz_compose.style.dateTextStyle
 import com.akash.newzz_compose.style.dividerColor
@@ -50,7 +50,7 @@ fun ArticleRow(article: NewsArticle, isDark: State<Boolean>, onClick: () -> Unit
             Column {
                 if (!article.source.name.isNullOrEmpty()) {
                     Text(
-                        text = article.source.name,
+                        text = article.source.name!!,
                         style = if (isDark.value) sourceTextStyle.copy(color = sourceTextColorDark) else sourceTextStyle
                     )
                     HeightSpacer(value = 4.dp)

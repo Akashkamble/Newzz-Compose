@@ -1,4 +1,4 @@
-package com.akash.newzz_compose.data.response
+package com.akash.newzz.data.response
 
 import com.squareup.moshi.JsonClass
 

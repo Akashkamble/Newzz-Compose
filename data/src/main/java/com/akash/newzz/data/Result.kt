@@ -1,7 +1,7 @@
-package com.akash.newzz_compose.utils
+package com.akash.newzz.data
 
 /**
- * Created by Akash on 06/06/20
+ * Created by Akash on 02/07/20
  */
 
 sealed class Result<out R> {
