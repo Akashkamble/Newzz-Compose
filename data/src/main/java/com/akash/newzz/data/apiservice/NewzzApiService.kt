@@ -1,11 +1,8 @@
-package com.akash.newzz_compose.data.apiservice
+package com.akash.newzz.data.apiservice
 
-/**
- * Created by Akash on 06/06/20
- */
-import com.akash.newzz_compose.Constants
-import com.akash.newzz_compose.NewsApplication
-import com.akash.newzz_compose.data.response.NewsResponse
+import com.akash.newzz.data.BaseApplication
+import com.akash.newzz.data.Constants
+import com.akash.newzz.data.response.NewsResponse
 import java.io.File
 import java.util.concurrent.TimeUnit
 import okhttp3.Cache
@@ -18,8 +15,10 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface NewsApiService {
-
+/**
+ * Created by Akash on 02/07/20
+ */
+interface NewzzApiService {
     @GET("top-headlines?sortBy=publishedAt&pageSize=50")
     suspend fun getArticlesByCateGoryAsync(
         @Query("category") category: String,
@@ -32,7 +31,7 @@ interface NewsApiService {
         private const val HEADER_PRAGMA = "Pragma"
         private const val cacheSize = (5 * 1024 * 1024).toLong() // 5 MB
 
-        operator fun invoke(): NewsApiService {
+        operator fun invoke(): NewzzApiService {
             val requestInterceptor = Interceptor { chain ->
 
                 val response = chain.proceed(chain.request())
@@ -49,7 +48,7 @@ interface NewsApiService {
             }
 
             val cache = Cache(
-                File(NewsApplication.instances.cacheDir, "networkCache"),
+                File(BaseApplication.instances.cacheDir, "networkCache"),
                 cacheSize
             )
 
@@ -63,7 +62,7 @@ interface NewsApiService {
 
                 var request = chain.request()
 
-                if (NewsApplication.isNetworkConnected()) {
+                if (BaseApplication.isNetworkConnected()) {
 
                     request = request
                         .newBuilder()
@@ -98,7 +97,7 @@ interface NewsApiService {
                 .client(okHttpClient)
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build()
-                .create(NewsApiService::class.java)
+                .create(NewzzApiService::class.java)
         }
     }
 }

@@ -3,10 +3,10 @@ package com.akash.newzz_compose.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.akash.newzz.data.Result
+import com.akash.newzz.data.repository.NewsRepository
+import com.akash.newzz.data.response.NewsArticle
 import com.akash.newzz_compose.Category
-import com.akash.newzz_compose.data.repository.NewsRepository
-import com.akash.newzz_compose.data.response.NewsArticle
-import com.akash.newzz_compose.utils.Result
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob

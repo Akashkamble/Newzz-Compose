@@ -1,7 +1,7 @@
-package com.akash.newzz_compose.data.repository
+package com.akash.newzz.data.repository
 
-import com.akash.newzz_compose.data.response.NewsResponse
-import com.akash.newzz_compose.utils.Result
+import com.akash.newzz.data.Result
+import com.akash.newzz.data.response.NewsResponse
 
 /**
  * Created by Akash on 06/06/20

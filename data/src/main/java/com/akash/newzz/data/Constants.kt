@@ -1,4 +1,4 @@
-package com.akash.newzz_compose
+package com.akash.newzz.data
 
 /**
  * Created by Akash on 06/06/20
