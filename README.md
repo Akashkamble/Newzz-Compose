@@ -10,7 +10,7 @@ News App built with JetPack Compose
 
 ## The app contains following libraries
 
-- [Jetpack Compose(v0.1.0-dev13)] (https://developer.android.com/jetpack/compose) (UI)
+- [Jetpack Compose(v0.1.0-dev14)] (https://developer.android.com/jetpack/compose) (UI)
 
 - [Koin](https://insert-koin.io/) (Dependency Injection)
 
