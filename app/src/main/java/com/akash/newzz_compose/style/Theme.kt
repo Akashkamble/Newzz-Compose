@@ -22,4 +22,3 @@ val darkThemeColor = darkColorPalette(
     secondary = darkColor,
     surface = darkColor
 )
-

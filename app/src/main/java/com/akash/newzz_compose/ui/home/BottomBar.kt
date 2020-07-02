@@ -11,7 +11,12 @@ import androidx.ui.material.BottomAppBar
 import androidx.ui.material.IconButton
 import androidx.ui.res.vectorResource
 import com.akash.newzz_compose.R
-import com.akash.newzz_compose.style.*
+import com.akash.newzz_compose.style.bottomNavBackground
+import com.akash.newzz_compose.style.bottomNavBackgroundDark
+import com.akash.newzz_compose.style.bottomNavIconActiveColor
+import com.akash.newzz_compose.style.bottomNavIconActiveColorDark
+import com.akash.newzz_compose.style.bottomNavIconInActiveColor
+import com.akash.newzz_compose.style.bottomNavIconInActiveColorDark
 import com.akash.newzz_compose.viewmodel.NewzzViewModel
 
 /**

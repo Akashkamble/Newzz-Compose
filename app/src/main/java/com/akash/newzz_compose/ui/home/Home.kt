@@ -14,6 +14,6 @@ fun Home(
 ) {
     Scaffold(
         bodyContent = { BodyContent(viewModel) },
-        bottomAppBar = { BottomBar(viewModel) }
+        bottomBar = { BottomBar(viewModel) }
     )
 }

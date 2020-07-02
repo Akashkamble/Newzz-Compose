@@ -7,14 +7,24 @@ import androidx.ui.core.ContextAmbient
 import androidx.ui.core.Modifier
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.Text
-import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.clickable
-import androidx.ui.layout.*
+import androidx.ui.foundation.lazy.LazyColumnItems
+import androidx.ui.layout.Column
+import androidx.ui.layout.Row
+import androidx.ui.layout.padding
+import androidx.ui.layout.preferredHeight
+import androidx.ui.layout.preferredWidth
 import androidx.ui.material.Divider
 import androidx.ui.text.style.TextOverflow
 import androidx.ui.unit.dp
 import com.akash.newzz_compose.data.response.NewsArticle
-import com.akash.newzz_compose.style.*
+import com.akash.newzz_compose.style.articleTitleStyle
+import com.akash.newzz_compose.style.dateTextStyle
+import com.akash.newzz_compose.style.dividerColor
+import com.akash.newzz_compose.style.dividerColorDark
+import com.akash.newzz_compose.style.sourceTextColorDark
+import com.akash.newzz_compose.style.sourceTextStyle
+import com.akash.newzz_compose.style.titleColorDark
 import com.akash.newzz_compose.ui.common.HeightSpacer
 import com.akash.newzz_compose.ui.common.RemoteImage
 import com.akash.newzz_compose.ui.common.WidthSpacer
@@ -63,41 +73,21 @@ fun ArticleRow(article: NewsArticle, isDark: State<Boolean>, onClick: () -> Unit
 
 @Composable
 fun ArticleList(articles: List<NewsArticle>, isDark: State<Boolean>) {
-    /**
-     * App crashing while scrolling the AdapterList hence verticalScroller with Columns used.
-     * @see <a href="https://issuetracker.google.com/issues/154653504">Issue tracker</a>
-     * Not fixed in version 0.1.0-dev13
-     */
-
     val context = ContextAmbient.current
-    /*AdapterList(data = articles) { article ->
-        ArticleRow(
-            article = article,
-            isDark = isDark,
-            onClick = {
-                CustomTabUtil.launch(context, article.url.toString(), isDark.value)
-            }
-        )
-        HeightSpacer(value = 10.dp)
-        Divider(
-            color = if (isDark.value) dividerColorDark else dividerColor
-        )
-    }*/
-
-    VerticalScroller {
-        Column(modifier = Modifier.fillMaxWidth()) {
-            articles.forEach { article ->
-                ArticleRow(
-                    article = article,
-                    isDark = isDark,
-                    onClick = {
-                        CustomTabUtil.launch(context, article.url.toString(), isDark.value)
-                    }
-                )
-                Divider(
-                    color = if (isDark.value) dividerColorDark else dividerColor
-                )
-            }
+    LazyColumnItems(
+        items = articles,
+        itemContent = { article: NewsArticle ->
+            ArticleRow(
+                article = article,
+                isDark = isDark,
+                onClick = {
+                    CustomTabUtil.launch(context, article.url.toString(), isDark.value)
+                }
+            )
+            HeightSpacer(value = 10.dp)
+            Divider(
+                color = if (isDark.value) dividerColorDark else dividerColor
+            )
         }
-    }
+    )
 }

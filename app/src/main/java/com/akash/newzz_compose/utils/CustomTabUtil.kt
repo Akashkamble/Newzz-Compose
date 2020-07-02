@@ -57,4 +57,3 @@ object CustomTabUtil {
         }
     }
 }
-
