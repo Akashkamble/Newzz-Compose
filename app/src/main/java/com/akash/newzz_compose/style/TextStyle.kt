@@ -9,7 +9,6 @@ import androidx.ui.unit.sp
  * Created by Akash on 07/06/20
  */
 
-
 val categoryTitleStyle = TextStyle(
     fontWeight = FontWeight.Bold,
     fontSize = 20.sp,

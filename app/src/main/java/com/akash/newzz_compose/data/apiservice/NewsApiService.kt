@@ -6,6 +6,8 @@ package com.akash.newzz_compose.data.apiservice
 import com.akash.newzz_compose.Constants
 import com.akash.newzz_compose.NewsApplication
 import com.akash.newzz_compose.data.response.NewsResponse
+import java.io.File
+import java.util.concurrent.TimeUnit
 import okhttp3.Cache
 import okhttp3.CacheControl
 import okhttp3.Interceptor
@@ -15,25 +17,20 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
-import java.io.File
-import java.util.concurrent.TimeUnit
 
 interface NewsApiService {
 
-
-    @GET("top-headlines?sortBy=publishedAt&pageSize=25")
+    @GET("top-headlines?sortBy=publishedAt&pageSize=50")
     suspend fun getArticlesByCateGoryAsync(
         @Query("category") category: String,
         @Query("country") country: String = Constants.COUNTRY
     ): Response<NewsResponse>
-
 
     companion object {
 
         private const val HEADER_CACHE_CONTROL = "Cache-Control"
         private const val HEADER_PRAGMA = "Pragma"
         private const val cacheSize = (5 * 1024 * 1024).toLong() // 5 MB
-
 
         operator fun invoke(): NewsApiService {
             val requestInterceptor = Interceptor { chain ->
@@ -57,7 +54,6 @@ interface NewsApiService {
             )
 
             val offlineInterceptor = Interceptor { chain ->
-
 
                 val url = chain.request()
                     .url
@@ -86,7 +82,6 @@ interface NewsApiService {
                         .removeHeader(HEADER_CACHE_CONTROL)
                         .cacheControl(cacheControl)
                         .build()
-
                 }
 
                 return@Interceptor chain.proceed(request)

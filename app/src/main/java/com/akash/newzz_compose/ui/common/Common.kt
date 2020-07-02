@@ -10,7 +10,11 @@ import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.Shape
 import androidx.ui.graphics.vector.VectorAsset
-import androidx.ui.layout.*
+import androidx.ui.layout.Spacer
+import androidx.ui.layout.Stack
+import androidx.ui.layout.fillMaxSize
+import androidx.ui.layout.preferredHeight
+import androidx.ui.layout.preferredWidth
 import androidx.ui.material.CircularProgressIndicator
 import androidx.ui.material.Surface
 import androidx.ui.res.vectorResource
@@ -67,4 +71,3 @@ fun RemoteImage(
         }
     }
 }
-

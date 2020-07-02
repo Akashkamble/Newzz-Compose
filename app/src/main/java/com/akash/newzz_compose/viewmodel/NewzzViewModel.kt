@@ -7,7 +7,12 @@ import com.akash.newzz_compose.Category
 import com.akash.newzz_compose.data.repository.NewsRepository
 import com.akash.newzz_compose.data.response.NewsArticle
 import com.akash.newzz_compose.utils.Result
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.plus
+import kotlinx.coroutines.withContext
 
 /**
  * Created by Akash on 06/06/20
@@ -202,5 +207,4 @@ class NewzzViewModel(private val repo: NewsRepository) : ViewModel() {
         const val Business = 2
         const val Technology = 3
     }
-
 }

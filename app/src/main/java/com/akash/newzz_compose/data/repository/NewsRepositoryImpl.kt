@@ -38,7 +38,6 @@ class NewsRepositoryImpl constructor(
                     )
                 }
             }
-
         } catch (e: Exception) {
             e.printStackTrace()
             var errorMessage = e.localizedMessage
@@ -53,5 +52,4 @@ class NewsRepositoryImpl constructor(
         "apiKeyDisabled", "apiKeyExhausted", "apiKeyInvalid", "apiKeyMissing" -> false
         else -> true
     }
-
 }

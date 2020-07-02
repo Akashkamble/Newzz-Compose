@@ -9,7 +9,12 @@ import androidx.ui.foundation.Icon
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
-import androidx.ui.layout.*
+import androidx.ui.layout.Arrangement
+import androidx.ui.layout.Column
+import androidx.ui.layout.Row
+import androidx.ui.layout.fillMaxSize
+import androidx.ui.layout.fillMaxWidth
+import androidx.ui.layout.padding
 import androidx.ui.livedata.observeAsState
 import androidx.ui.material.CircularProgressIndicator
 import androidx.ui.material.IconButton
@@ -20,10 +25,17 @@ import androidx.ui.text.TextStyle
 import androidx.ui.unit.dp
 import com.akash.newzz_compose.Category
 import com.akash.newzz_compose.R
-import com.akash.newzz_compose.style.*
+import com.akash.newzz_compose.style.articleTitleStyle
+import com.akash.newzz_compose.style.categoryTitleStyle
+import com.akash.newzz_compose.style.circularLoaderColor
+import com.akash.newzz_compose.style.circularLoaderColorDark
+import com.akash.newzz_compose.style.deepPurple
+import com.akash.newzz_compose.style.listBackgroundColor
+import com.akash.newzz_compose.style.listBackgroundColorDark
+import com.akash.newzz_compose.style.sourceTextColorDark
+import com.akash.newzz_compose.style.titleColorDark
 import com.akash.newzz_compose.ui.articlelist.ArticleList
 import com.akash.newzz_compose.viewmodel.NewzzViewModel
-
 
 /**
  * Created by Akash on 05/06/20
@@ -119,7 +131,6 @@ fun ArticleStateWidget(
     }
 }
 
-
 @Composable
 fun ThemeSwitcher(viewModel: NewzzViewModel) {
     val isDark = viewModel.isDarkTheme.observeAsState(false)
@@ -134,7 +145,6 @@ fun ThemeSwitcher(viewModel: NewzzViewModel) {
         )
     }
 }
-
 
 @Composable
 fun Loading(isDark: State<Boolean>) {
@@ -175,7 +185,6 @@ fun ErrorView(
         }
     }
 }
-
 
 private fun getTitle(pageNumber: Int): String = when (pageNumber) {
     1 -> "General"

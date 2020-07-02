@@ -16,17 +16,15 @@ class NewsApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         instances = this
-        startKoin{
+        startKoin {
             androidLogger()
             androidContext(this@NewsApplication)
             modules(appModule)
         }
     }
 
-
     companion object {
         lateinit var instances: NewsApplication
-
 
         fun isNetworkConnected(): Boolean {
             val connectivityManager =

@@ -11,7 +11,6 @@ import com.akash.newzz_compose.ui.home.Home
 import com.akash.newzz_compose.viewmodel.NewzzViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-
 class NewzzActivity : AppCompatActivity() {
     private val viewModel: NewzzViewModel by viewModel()
 

@@ -1,9 +1,9 @@
 package com.akash.newzz_compose.di
 
-import com.akash.newzz_compose.viewmodel.NewzzViewModel
 import com.akash.newzz_compose.data.apiservice.NewsApiService
 import com.akash.newzz_compose.data.repository.NewsRepository
 import com.akash.newzz_compose.data.repository.NewsRepositoryImpl
+import com.akash.newzz_compose.viewmodel.NewzzViewModel
 import com.squareup.moshi.Moshi
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
