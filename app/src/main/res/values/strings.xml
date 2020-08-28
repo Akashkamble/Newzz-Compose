@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Newzz-Compose</string>
+    <string name="title_general">General</string>
+    <string name="title_business">Business</string>
+    <string name="title_technology">Technology</string>
 </resources>

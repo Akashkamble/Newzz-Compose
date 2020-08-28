@@ -8,15 +8,17 @@ import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 /**
  * Created by Akash on 06/06/20
  */
 
-class NewsRepositoryImpl constructor(
+class NewsRepositoryImpl @Inject constructor(
     private val newsApiService: NewzzApiService,
     private val moshi: Moshi
 ) : NewsRepository {
+    private val defaultDispatcher = Dispatchers.Default
     override suspend fun getArticlesByCategoryAsync(
         category: String,
         page: Int
@@ -33,7 +35,7 @@ class NewsRepositoryImpl constructor(
                 val jsonAdapter: JsonAdapter<NewsError> = moshi.adapter(
                     NewsError::class.java
                 )
-                withContext(Dispatchers.IO) {
+                withContext(defaultDispatcher) {
                     val newsError = jsonAdapter.fromJson(response.errorBody()?.string()!!)
                     Result.Error(
                         newsError!!.message,

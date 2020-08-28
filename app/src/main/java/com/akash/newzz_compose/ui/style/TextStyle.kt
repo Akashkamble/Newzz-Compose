@@ -1,17 +1,18 @@
-package com.akash.newzz_compose.style
+package com.akash.newzz_compose.ui.style
 
-import androidx.ui.graphics.Color
-import androidx.ui.text.TextStyle
-import androidx.ui.text.font.FontWeight
-import androidx.ui.unit.sp
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 
 /**
- * Created by Akash on 07/06/20
+ * Created by Akash on 28/08/20
  */
 
 val categoryTitleStyle = TextStyle(
-    fontWeight = FontWeight.Bold,
+    fontWeight = FontWeight.SemiBold,
     fontSize = 20.sp,
+    letterSpacing = 1.1.sp,
     color = Color.White
 )
 
