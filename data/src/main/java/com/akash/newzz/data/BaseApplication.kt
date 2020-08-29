@@ -8,6 +8,7 @@ import android.net.ConnectivityManager
  * Created by Akash on 02/07/20
  */
 
+@Suppress("DEPRECATION")
 open class BaseApplication : Application() {
 
     override fun onCreate() {

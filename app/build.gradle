@@ -2,17 +2,18 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 
 android {
     compileSdkVersion 29
 
     defaultConfig {
-        applicationId "com.akash.newzz_compose"
+        applicationId "com.akash.newzzcompose"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 2
-        versionName "0.0.2"
+        versionCode 3
+        versionName "0.0.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -28,14 +29,15 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        useIR = true
     }
     buildFeatures {
         compose true
     }
 
     composeOptions {
-        kotlinCompilerVersion "1.3.70-dev-withExperimentalGoogleExtensions-20200424"
-        kotlinCompilerExtensionVersion "0.1.0-dev14"
+        kotlinCompilerVersion "$kotlin_version"
+        kotlinCompilerExtensionVersion "$compose_version"
     }
 }
 
@@ -43,36 +45,45 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(':data')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation "androidx.activity:activity-ktx:1.1.0"
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
 
     /* ---------------------JetPack Compose-----------------------------*/
-    implementation("androidx.compose:compose-runtime:$compose_version")
-    implementation("androidx.ui:ui-core:$compose_version")
-    implementation "androidx.ui:ui-layout:$compose_version"
-    implementation "androidx.ui:ui-material:$compose_version"
-    implementation "androidx.ui:ui-tooling:$compose_version"
-    implementation "androidx.ui:ui-livedata:$compose_version"
+    implementation("androidx.compose.runtime:runtime:$compose_version")
+    implementation("androidx.compose.runtime:runtime-livedata:$compose_version")
+    implementation("androidx.compose.foundation:foundation:$compose_version")
+    implementation("androidx.compose.foundation:foundation-layout:$compose_version")
+
+    implementation("androidx.compose.ui:ui:$compose_version")
+    implementation("androidx.compose.material:material:$compose_version")
+    implementation("androidx.compose.material:material-icons-extended:$compose_version")
+
+    implementation("androidx.ui:ui-tooling:$compose_version")
 
     /* ---------------------LifeCycle Extension-----------------------------*/
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 
-    /*-----------------------Koin-------------------------------------*/
-    implementation "org.koin:koin-android:$koin_version"
-    implementation "org.koin:koin-android-viewmodel:$koin_version"
+    /*------------------------Dagger Hilt----------------------------------*/
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_jetpack_config_version"
+    kapt "androidx.hilt:hilt-compiler:$hilt_jetpack_config_version"
 
     /*---------------------ChromeCustomTab------------------------------*/
-    implementation 'androidx.browser:browser:1.3.0-alpha04'
+    implementation 'androidx.browser:browser:1.3.0-alpha05'
 
     /*---------------------CoilImageLoader------------------------------*/
-    implementation "dev.chrisbanes.accompanist:accompanist-coil:0.1.6"
+    implementation "dev.chrisbanes.accompanist:accompanist-coil:0.2.0"
 
     /*----------------------------Moshi-------------------------------------*/
     implementation 'com.squareup.moshi:moshi:1.9.1'
 
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
 }

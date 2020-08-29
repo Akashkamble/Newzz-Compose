@@ -10,13 +10,13 @@ News App built with JetPack Compose
 
 ## The app contains following libraries
 
-- [Jetpack Compose(v0.1.0-dev14)] (https://developer.android.com/jetpack/compose) (UI)
+- [Jetpack Compose](https://developer.android.com/jetpack/compose) (UI)
 
-- [Koin](https://insert-koin.io/) (Dependency Injection)
+- [Dagger-Hilt](https://dagger.dev/hilt/) (Dependency Injection)
 
 - [LifeCycle Components](https://developer.android.com/topic/libraries/architecture/livedata) (ViewModel and LiveData)
 
-- [Kotlin Corountines](https://kotlinlang.org/docs/reference/coroutines-overview.html) (Asynchronous programming)
+- [Kotlin Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) (Asynchronous programming)
 
 - [Retrofit](https://square.github.io/retrofit/) (Networking)
 
