@@ -11,7 +11,6 @@ interface Category {
     val icon: Int
 }
 
-
 data class General(
     override val category: String = "general",
     override val icon: Int = R.drawable.ic_general
@@ -26,7 +25,6 @@ data class Technology(
     override val category: String = "technology",
     override val icon: Int = R.drawable.ic_tech
 ) : Category
-
 
 fun getTitleResource(activeCategory: Category): Int = when (activeCategory) {
     is General -> R.string.title_general

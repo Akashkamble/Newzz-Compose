@@ -46,6 +46,3 @@ fun BottomBar(
         }
     }
 }
-
-
-

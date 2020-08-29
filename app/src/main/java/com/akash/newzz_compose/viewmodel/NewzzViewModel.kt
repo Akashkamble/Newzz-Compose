@@ -50,7 +50,7 @@ class NewzzViewModel @ViewModelInject constructor(private val repo: NewsReposito
 
     private fun getArticlesByCategory(
             category: Category,
-            page: Int = 1,
+            page: Int = 1
     ) {
         viewModelScope.launch {
             setLoadingState(category)
@@ -162,7 +162,6 @@ class NewzzViewModel @ViewModelInject constructor(private val repo: NewsReposito
             }
         }
     }
-
 
     sealed class Action {
         data class ChangePageTo(val category: Category) : Action()

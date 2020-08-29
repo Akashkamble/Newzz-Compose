@@ -17,15 +17,15 @@ val categoryTitleStyle = TextStyle(
 )
 
 val articleTitleStyle = TextStyle(
-    fontWeight = FontWeight.Medium,
-    fontSize = 16.sp,
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp
 )
 
 val sourceTextStyle = TextStyle(
-    fontSize = 14.sp,
+        fontSize = 14.sp
 )
 
 val dateTextStyle = TextStyle(
-    fontWeight = FontWeight.ExtraLight,
-    fontSize = 12.sp,
+        fontWeight = FontWeight.ExtraLight,
+        fontSize = 12.sp
 )

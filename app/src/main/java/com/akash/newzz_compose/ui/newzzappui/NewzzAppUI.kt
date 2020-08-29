@@ -66,9 +66,8 @@ fun BodyContent(
                     uiState = activeCategoryUiState,
                     retry = {
                         retryFetchingArticles(activeCategory)
-                    },
+                    }
             )
         }
     }
 }
-

@@ -26,7 +26,7 @@ import com.akash.newzz_compose.ui.style.articleTitleStyle
 @Composable
 fun NewzzListContainer(
         uiState: ArticleListUiState,
-        retry: () -> Unit,
+        retry: () -> Unit
 ) {
     Surface(
             color = NewzzTheme.colors.backGroundColor,
@@ -50,7 +50,7 @@ fun NewzzListContainer(
             }
             uiState.list?.isEmpty() == false -> {
                 ArticleList(
-                        articles = uiState.list,
+                        articles = uiState.list
                 )
             }
         }
