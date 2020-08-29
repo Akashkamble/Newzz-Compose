@@ -19,16 +19,13 @@ val categoryTitleStyle = TextStyle(
 val articleTitleStyle = TextStyle(
     fontWeight = FontWeight.Medium,
     fontSize = 16.sp,
-    color = titleColor
 )
 
 val sourceTextStyle = TextStyle(
     fontSize = 14.sp,
-    color = sourceTextColor
 )
 
 val dateTextStyle = TextStyle(
     fontWeight = FontWeight.ExtraLight,
     fontSize = 12.sp,
-    color = sourceTextColor
 )

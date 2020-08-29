@@ -20,38 +20,54 @@ import com.akash.newzz_compose.viewmodel.NewzzViewModel
 fun NewzzAppUI(viewModel: NewzzViewModel) {
     val categoryList = viewModel.categoryList.observeAsState().value!!
     val activeCategory = viewModel.activeCategory.observeAsState().value!!
+    val activeCategoryUiState = viewModel.activeCategoryUiState.observeAsState().value!!
     Scaffold(
-        bodyContent = {
-            BodyContent(
-                activeCategory = activeCategory,
-                onThemeSwitch = {
-                    viewModel.performAction(NewzzViewModel.Action.SwitchTheme)
-                }
-            )
-        },
-        bottomBar = {
-            BottomBar(
-                categoryList = categoryList,
-                onMenuClicked = { category ->
-                    viewModel.performAction(NewzzViewModel.Action.ChangePageTo(category))
-                },
-                activeCategory = activeCategory
-            )
-        }
+            bodyContent = {
+                BodyContent(
+                        activeCategory = activeCategory,
+                        onThemeSwitch = {
+                            viewModel.performAction(NewzzViewModel.Action.SwitchTheme)
+                        },
+                        activeCategoryUiState = activeCategoryUiState,
+                        retryFetchingArticles = { category ->
+                            viewModel.performAction(NewzzViewModel.Action.FetchArticles(category))
+                        }
+                )
+            },
+            bottomBar = {
+                BottomBar(
+                        categoryList = categoryList,
+                        onMenuClicked = { category ->
+                            viewModel.performAction(NewzzViewModel.Action.ChangePageTo(category))
+                        },
+                        activeCategory = activeCategory
+                )
+            }
     )
 }
 
 @Composable
-fun BodyContent(activeCategory: Category, onThemeSwitch: () -> Unit) {
+fun BodyContent(
+        activeCategory: Category,
+        activeCategoryUiState: ArticleListUiState,
+        onThemeSwitch: () -> Unit,
+        retryFetchingArticles: (Category) -> Unit
+) {
     val stringRes = getTitleResource(activeCategory)
     Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = NewzzTheme.colors.primaryColor
+            modifier = Modifier.fillMaxSize(),
+            color = NewzzTheme.colors.primaryColor
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             TopAppBar(stringRes, onThemeSwitch = {
                 onThemeSwitch()
             })
+            NewzzListContainer(
+                    uiState = activeCategoryUiState,
+                    retry = {
+                        retryFetchingArticles(activeCategory)
+                    },
+            )
         }
     }
 }

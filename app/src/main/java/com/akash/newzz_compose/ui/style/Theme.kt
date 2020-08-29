@@ -50,16 +50,16 @@ private val LightColorPalette = NewzzColorPalette(
 )
 
 private val DarkColorPalette = NewzzColorPalette(
-    primaryColor = darkColor,
-    backGroundColor = listBackgroundColorDark,
-    dividerColor = dividerColorDark,
-    titleColor = titleColorDark,
-    sourceColor = sourceTextColorDark,
-    bottomNavBackground = bottomNavBackgroundDark,
-    circularLoaderColor = circularLoaderColorDark,
-    bottomNavActiveIconColor = bottomNavIconActiveColorDark,
-    bottomNavInActiveIconColor = bottomNavIconInActiveColorDark,
-    isDark = false
+        primaryColor = darkColor,
+        backGroundColor = listBackgroundColorDark,
+        dividerColor = dividerColorDark,
+        titleColor = titleColorDark,
+        sourceColor = sourceTextColorDark,
+        bottomNavBackground = bottomNavBackgroundDark,
+        circularLoaderColor = circularLoaderColorDark,
+        bottomNavActiveIconColor = bottomNavIconActiveColorDark,
+        bottomNavInActiveIconColor = bottomNavIconInActiveColorDark,
+        isDark = true
 )
 
 @Composable
@@ -118,19 +118,6 @@ class NewzzColorPalette(
         private set
     var isDark by mutableStateOf(isDark)
         private set
-
-    fun update(other: NewzzColorPalette) {
-        primaryColor = other.primaryColor
-        backGroundColor = other.backGroundColor
-        dividerColor = other.dividerColor
-        titleColor = other.titleColor
-        sourceColor = other.sourceColor
-        bottomNavBackground = other.bottomNavBackground
-        circularLoaderColor = other.circularLoaderColor
-        bottomNavActiveIconColor = other.bottomNavActiveIconColor
-        bottomNavInActiveIconColor = other.bottomNavInActiveIconColor
-        isDark = other.isDark
-    }
 }
 
 @Composable
@@ -138,7 +125,6 @@ fun ProvideNewzzColors(
     colors: NewzzColorPalette,
     content: @Composable () -> Unit
 ) {
-//    colors.update(colors)
     Providers(NewzzColorAmbient provides colors, children = content)
 }
 
@@ -151,8 +137,8 @@ private val NewzzColorAmbient = staticAmbientOf<NewzzColorPalette> {
  * [MaterialTheme.colors] in preference to [NewzzTheme.colors].
  */
 fun debugColors(
-    darkTheme: Boolean,
-    debugColor: Color = Color.Magenta
+        darkTheme: Boolean,
+        debugColor: Color = Color(0x1f000000)
 ) = Colors(
     primary = debugColor,
     primaryVariant = debugColor,
