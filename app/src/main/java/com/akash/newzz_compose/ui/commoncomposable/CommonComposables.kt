@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.akash.newzz_compose.R
 import com.akash.newzz_compose.ui.style.NewzzTheme
 import com.akash.newzz_compose.ui.style.titleColorDark
-import dev.chrisbanes.accompanist.coil.CoilImage
+import dev.chrisbanes.accompanist.coil.CoilImageWithCrossfade
 
 /**
  * Created by Akash on 29/08/20
@@ -62,7 +62,7 @@ fun RemoteImage(
                     color = Color.Transparent,
                     shape = shape
             ) {
-                CoilImage(
+                CoilImageWithCrossfade(
                         data = url,
                         modifier = modifier,
                         contentScale = contentScale,
