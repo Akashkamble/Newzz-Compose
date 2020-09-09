@@ -1,5 +1,5 @@
 # Newzz-Compose
-News App built with JetPack Compose
+News App built with JetPack Compose(v1.0.0-alpha02)
 
 ## Gif
 ![compose](https://user-images.githubusercontent.com/13314984/83972646-00b1ca80-a8ff-11ea-93b0-92daf03bc0a0.gif)

@@ -1,7 +1,6 @@
 package com.akash.newzz_compose.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.livedata.observeAsState
@@ -23,7 +22,6 @@ class NewzzActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val darkTheme = viewModel.isDarkTheme.observeAsState(false)
-            Log.d("THEME", "darkTheme: ${darkTheme.value}")
             NewzzTheme(darkTheme = darkTheme.value) {
                 NewzzAppUI(viewModel = viewModel)
             }
