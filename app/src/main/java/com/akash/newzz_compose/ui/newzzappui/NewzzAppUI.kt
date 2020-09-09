@@ -20,7 +20,15 @@ import com.akash.newzz_compose.viewmodel.NewzzViewModel
 fun NewzzAppUI(viewModel: NewzzViewModel) {
     val categoryList = viewModel.categoryList.observeAsState().value!!
     val activeCategory = viewModel.activeCategory.observeAsState().value!!
-    val activeCategoryUiState = viewModel.activeCategoryUiState.observeAsState().value!!
+    val firstCategoryUiState = viewModel.firstCategoryUiState.observeAsState().value!!
+    val secondCategoryUiState = viewModel.secondCategoryUiState.observeAsState().value!!
+    val thirdCategoryUiState = viewModel.thirdCategoryUiState.observeAsState().value!!
+    val listOfUiState = listOf(
+            firstCategoryUiState,
+            secondCategoryUiState,
+            thirdCategoryUiState
+    )
+    val activeIndex = categoryList.indexOf(activeCategory)
     Scaffold(
             bodyContent = {
                 BodyContent(
@@ -28,7 +36,8 @@ fun NewzzAppUI(viewModel: NewzzViewModel) {
                         onThemeSwitch = {
                             viewModel.performAction(NewzzViewModel.Action.SwitchTheme)
                         },
-                        activeCategoryUiState = activeCategoryUiState,
+                        activeCategoryUiStateList = listOfUiState,
+                        activeIndex = activeIndex,
                         retryFetchingArticles = { category ->
                             viewModel.performAction(NewzzViewModel.Action.FetchArticles(category))
                         }
@@ -49,8 +58,9 @@ fun NewzzAppUI(viewModel: NewzzViewModel) {
 @Composable
 fun BodyContent(
         activeCategory: Category,
-        activeCategoryUiState: ArticleListUiState,
+        activeCategoryUiStateList: List<ArticleListUiState>,
         onThemeSwitch: () -> Unit,
+        activeIndex: Int,
         retryFetchingArticles: (Category) -> Unit
 ) {
     val stringRes = getTitleResource(activeCategory)
@@ -62,12 +72,37 @@ fun BodyContent(
             TopAppBar(stringRes, onThemeSwitch = {
                 onThemeSwitch()
             })
-            NewzzListContainer(
-                    uiState = activeCategoryUiState,
-                    retry = {
-                        retryFetchingArticles(activeCategory)
-                    }
-            )
+            /* This when statement does not make any sense. Need to figure out better solution.
+               the idea was to change uiState based on activeCategory, but when 2 category has different number of articles
+               and you switch between pages LazyColumnFor remembers scroll position of previous state which leads to ArrayIndexOutOfBound Exception.
+             */
+            when (activeIndex) {
+                0 -> {
+                    NewzzListContainer(
+                            uiState = activeCategoryUiStateList[activeIndex],
+                            retry = {
+                                retryFetchingArticles(activeCategory)
+                            }
+                    )
+                }
+                1 -> {
+                    NewzzListContainer(
+                            uiState = activeCategoryUiStateList[activeIndex],
+                            retry = {
+                                retryFetchingArticles(activeCategory)
+                            }
+                    )
+                }
+                2 -> {
+                    NewzzListContainer(
+                            uiState = activeCategoryUiStateList[activeIndex],
+                            retry = {
+                                retryFetchingArticles(activeCategory)
+                            }
+                    )
+                }
+            }
+
         }
     }
 }

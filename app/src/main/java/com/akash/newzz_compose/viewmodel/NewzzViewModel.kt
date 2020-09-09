@@ -35,14 +35,26 @@ class NewzzViewModel @ViewModelInject constructor(private val repo: NewsReposito
     }
     val activeCategory: LiveData<Category> = _activeCategory
 
-    private val _activeCategoryUiState = MutableLiveData<ArticleListUiState>().apply {
+    /*private val _activeCategoryUiState = MutableLiveData<ArticleListUiState>().apply {
         value = ArticleListUiState()
     }
-    val activeCategoryUiState: LiveData<ArticleListUiState> = _activeCategoryUiState
+    private val activeCategoryUiState: LiveData<ArticleListUiState> = _activeCategoryUiState*/
 
     private var firstPageUiState = ArticleListUiState()
+    private val _firstCategoryUiState = MutableLiveData<ArticleListUiState>().apply {
+        value = ArticleListUiState()
+    }
+    val firstCategoryUiState: LiveData<ArticleListUiState> = _firstCategoryUiState
     private var secondPageUiState = ArticleListUiState()
+    private val _secondCategoryUiState = MutableLiveData<ArticleListUiState>().apply {
+        value = ArticleListUiState()
+    }
+    val secondCategoryUiState: LiveData<ArticleListUiState> = _secondCategoryUiState
     private var thirdPageUiState = ArticleListUiState()
+    private val _thirdCategoryUiState = MutableLiveData<ArticleListUiState>().apply {
+        value = ArticleListUiState()
+    }
+    val thirdCategoryUiState: LiveData<ArticleListUiState> = _thirdCategoryUiState
 
     init {
         getArticlesByCategory(categoryList.value!![0])
@@ -74,12 +86,24 @@ class NewzzViewModel @ViewModelInject constructor(private val repo: NewsReposito
             is Action.ChangePageTo -> {
                 _activeCategory.value = action.category
                 when (categoryList.value!!.indexOf(action.category)) {
-                    0 -> _activeCategoryUiState.value = firstPageUiState
-                    1 -> _activeCategoryUiState.value = secondPageUiState
-                    2 -> _activeCategoryUiState.value = thirdPageUiState
-                }
-                if (activeCategoryUiState.value!!.list == null || activeCategoryUiState.value!!.list!!.isEmpty()) {
-                    getArticlesByCategory(action.category)
+                    0 -> {
+                        _firstCategoryUiState.value = firstPageUiState
+                        if (_firstCategoryUiState.value!!.list == null || _firstCategoryUiState.value!!.list!!.isEmpty()) {
+                            getArticlesByCategory(action.category)
+                        }
+                    }
+                    1 -> {
+                        _secondCategoryUiState.value = secondPageUiState
+                        if (_secondCategoryUiState.value!!.list == null || _secondCategoryUiState.value!!.list!!.isEmpty()) {
+                            getArticlesByCategory(action.category)
+                        }
+                    }
+                    2 -> {
+                        _thirdCategoryUiState.value = thirdPageUiState
+                        if (_thirdCategoryUiState.value!!.list == null || _thirdCategoryUiState.value!!.list!!.isEmpty()) {
+                            getArticlesByCategory(action.category)
+                        }
+                    }
                 }
             }
             is Action.FetchArticles -> {
@@ -99,7 +123,7 @@ class NewzzViewModel @ViewModelInject constructor(private val repo: NewsReposito
                         list = null,
                         error = error
                 )
-                _activeCategoryUiState.value = firstPageUiState
+                _firstCategoryUiState.value = firstPageUiState
             }
             1 -> {
                 secondPageUiState = secondPageUiState.copy(
@@ -107,7 +131,7 @@ class NewzzViewModel @ViewModelInject constructor(private val repo: NewsReposito
                         list = null,
                         error = error
                 )
-                _activeCategoryUiState.value = secondPageUiState
+                _secondCategoryUiState.value = secondPageUiState
             }
             2 -> {
                 thirdPageUiState = thirdPageUiState.copy(
@@ -115,7 +139,7 @@ class NewzzViewModel @ViewModelInject constructor(private val repo: NewsReposito
                         list = null,
                         error = error
                 )
-                _activeCategoryUiState.value = thirdPageUiState
+                _thirdCategoryUiState.value = thirdPageUiState
             }
         }
     }
@@ -128,7 +152,7 @@ class NewzzViewModel @ViewModelInject constructor(private val repo: NewsReposito
                         list = data.articles,
                         error = null
                 )
-                _activeCategoryUiState.value = firstPageUiState
+                _firstCategoryUiState.value = firstPageUiState
             }
             1 -> {
                 secondPageUiState = secondPageUiState.copy(
@@ -136,7 +160,7 @@ class NewzzViewModel @ViewModelInject constructor(private val repo: NewsReposito
                         list = data.articles,
                         error = null
                 )
-                _activeCategoryUiState.value = secondPageUiState
+                _secondCategoryUiState.value = secondPageUiState
             }
             2 -> {
                 thirdPageUiState = thirdPageUiState.copy(
@@ -144,7 +168,7 @@ class NewzzViewModel @ViewModelInject constructor(private val repo: NewsReposito
                         list = data.articles,
                         error = null
                 )
-                _activeCategoryUiState.value = thirdPageUiState
+                _thirdCategoryUiState.value = thirdPageUiState
             }
         }
     }
@@ -152,13 +176,13 @@ class NewzzViewModel @ViewModelInject constructor(private val repo: NewsReposito
     private fun setLoadingState(category: Category) {
         when (categoryList.value!!.indexOf(category)) {
             0 -> {
-                _activeCategoryUiState.value = firstPageUiState.copy(isLoading = true)
+                _firstCategoryUiState.value = firstPageUiState.copy(isLoading = true)
             }
             1 -> {
-                _activeCategoryUiState.value = secondPageUiState.copy(isLoading = true)
+                _secondCategoryUiState.value = secondPageUiState.copy(isLoading = true)
             }
             2 -> {
-                _activeCategoryUiState.value = thirdPageUiState.copy(isLoading = true)
+                _thirdCategoryUiState.value = thirdPageUiState.copy(isLoading = true)
             }
         }
     }
