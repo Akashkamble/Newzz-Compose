@@ -16,13 +16,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NewzzActivityModule {
 
-    /*@Provides
-    @ActivityScoped
-    fun provideNewsRepo(
-        apiService: NewzzApiService,
-        moshi: Moshi
-    ): NewsRepository = NewsRepositoryImpl(apiService, moshi)*/
-
     @Provides
     @Singleton
     fun provideMoshi(): Moshi = Moshi.Builder().build()

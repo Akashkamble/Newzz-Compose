@@ -57,19 +57,6 @@ fun RemoteImage(
                 color = Color.Transparent,
                 shape = shape
             ) {
-                /*CoilImageWithCrossfade(
-                    data = url,
-                    modifier = modifier,
-                    contentScale = contentScale,
-                    loading = {
-                        Box(Modifier.fillMaxSize()) {
-                            CircularProgressIndicator(
-                                color = MaterialTheme.colors.primary,
-                                modifier = Modifier.align(Alignment.Center)
-                            )
-                        }
-                    }
-                )*/
                 Image(
                     painter = rememberImagePainter(
                         data = url,
