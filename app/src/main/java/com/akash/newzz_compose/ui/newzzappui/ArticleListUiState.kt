@@ -8,7 +8,7 @@ import com.akash.newzz.data.response.NewsArticle
  */
 
 data class ArticleListUiState(
-        val isLoading: Boolean = true,
-        val list: List<NewsArticle>? = emptyList(),
-        val error: Result.Error? = null
+    val isLoading: Boolean = true,
+    val list: List<NewsArticle>? = emptyList(),
+    val error: Result.Error? = null
 )
