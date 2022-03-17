@@ -1,6 +1,5 @@
 package com.akash.newzz_compose.ui.starwars.starwarslist
 
-import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,14 +21,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.akash.newzz.data.response.starwars.Character
 import com.akash.newzz_compose.ui.commoncomposable.RemoteImage
 import com.akash.newzz_compose.ui.commoncomposable.WidthSpacer
 import com.akash.newzz_compose.viewmodel.starwars.StarWarsViewModel
 
 @Composable
-fun  StarWarsListScreen(
-    viewModel : StarWarsViewModel,
+fun StarWarsListScreen(
+    viewModel: StarWarsViewModel,
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     val viewState = viewModel.viewState.collectAsState()
@@ -37,20 +38,24 @@ fun  StarWarsListScreen(
     Scaffold(
         modifier = modifier.fillMaxSize()
     ) {
-        CharacterListContent(viewState = viewState.value, modifier)
+        CharacterListContent(viewState = viewState.value, modifier = modifier) {
+            navController.currentBackStackEntry?.savedStateHandle?.set("character",it)
+            navController.navigate("details")
+        }
     }
 }
 
 @Composable
 fun CharacterListContent(
     viewState: CharacterListUiState,
-    modifier: Modifier
+    modifier: Modifier,
+    onCharacterClick: (character : Character) -> Unit
 ) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.primary
-    ){
-        when{
+    ) {
+        when {
             viewState.isLoading -> {
                 Column(
                     modifier = modifier.fillMaxSize(),
@@ -63,7 +68,9 @@ fun CharacterListContent(
                 }
             }
             viewState.list.isNotEmpty() -> {
-                CharacterList(list = viewState.list)
+                CharacterList(list = viewState.list) {
+                    onCharacterClick.invoke(it)
+                }
             }
         }
 
@@ -71,30 +78,38 @@ fun CharacterListContent(
 }
 
 @Composable
-fun CharacterList(list : List<Character>) {
+fun CharacterList(
+    list: List<Character>,
+    onCharacterClick: (character : Character) -> Unit
+) {
     val context = LocalContext.current
     LazyColumn(
         contentPadding = PaddingValues(top = 60.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
-    ){
-        items(list){ character ->
+    ) {
+        items(
+            items = list,
+            key = {character ->
+                character.name
+            }
+        ) { character ->
             CharacterRow(character = character) {
-                Toast.makeText(context, character.name, Toast.LENGTH_SHORT).show()
+                onCharacterClick.invoke(character)
             }
         }
     }
 }
 
 @Composable
-fun CharacterRow(character : Character, onCharacterClick: ()->Unit) {
+fun CharacterRow(character: Character, onCharacterClick: () -> Unit) {
     Row(
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
-            onCharacterClick.invoke()
-        }
+                onCharacterClick.invoke()
+            }
     ) {
         RemoteImage(
             url = character.image,
