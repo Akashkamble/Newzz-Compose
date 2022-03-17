@@ -1,6 +1,7 @@
 package com.akash.newzz_compose.di
 
 import com.akash.newzz.data.apiservice.NewzzApiService
+import com.akash.newzz.data.apiservice.StarWarsApiService
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -23,4 +24,8 @@ object NewzzActivityModule {
     @Provides
     @Singleton
     fun provideNewsApiService(): NewzzApiService = NewzzApiService.invoke()
+
+    @Provides
+    @Singleton
+    fun provideStarWarsApiService() : StarWarsApiService = StarWarsApiService.invoke()
 }
