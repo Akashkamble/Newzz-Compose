@@ -21,11 +21,14 @@ class StarWarsViewModel @Inject constructor(
     val viewState: StateFlow<CharacterListUiState> = _viewState
 
     init {
+        fetchCharacters()
+    }
+
+    fun fetchCharacters() {
         viewModelScope.launch {
             val result = repo.getStarWarsCharacters()
             _viewState.value = getViewStateFromResult(result)
         }
-
     }
 
     private fun getViewStateFromResult(result: Result<List<Character>>): CharacterListUiState {

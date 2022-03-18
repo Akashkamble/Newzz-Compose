@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
@@ -19,6 +20,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -38,28 +40,46 @@ fun StarWarsListScreen(
     Scaffold(
         modifier = modifier.fillMaxSize()
     ) {
-        CharacterListContent(viewState = viewState.value, modifier = modifier) {
-            navController.currentBackStackEntry?.savedStateHandle?.set("character",it)
-            navController.navigate("details")
-        }
+        CharacterListContent(
+            viewState = viewState.value,
+            modifier = modifier,
+            onCharacterClick = {
+                navController.currentBackStackEntry?.savedStateHandle?.set("character",it)
+                navController.navigate("details")
+            }
+        )
     }
 }
 
 @Composable
 fun CharacterListContent(
     viewState: CharacterListUiState,
-    modifier: Modifier,
-    onCharacterClick: (character : Character) -> Unit
+    modifier: Modifier = Modifier,
+    onCharacterClick: (character : Character) -> Unit,
 ) {
     Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colors.primary
+        modifier = modifier.fillMaxSize(),
+        color = MaterialTheme.colors.background
     ) {
         when {
+            viewState.error.isNotBlank() -> {
+                Column(
+                    modifier = modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = viewState.error,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.testTag("error_text")
+                    )
+                }
+            }
             viewState.isLoading -> {
                 Column(
                     modifier = modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.Center
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
                         text = "Loading..",
